@@ -19,8 +19,10 @@ function Hero(img) {
   this.moveBy = 8;
 
   this.show = function() {
-    // the person gets a point each frame
-    points++;
+    if (gameOn) {
+      // the person gets a point each frame
+      points++;
+    }
 
     // show the hero
     image(this.pic, this.x, this.y);
@@ -55,6 +57,20 @@ function Hero(img) {
         }
       }
     }
+
+    // check if an alien has collided with the hero
+    for (a of this.aliens) {
+      if (a) {
+        if (a.hasCollidedWithHero(this, this.pic.width)) {
+          gameOn = false;
+          alert(`You died!🤪👽.\nYour scores were: ${alienKills} alien kills and ${points} points`);
+          window.location = "home.html";
+        }
+      }
+    }
+
+
+
 
 
     // move the bullets for the next frame

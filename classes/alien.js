@@ -4,7 +4,7 @@ function Alien(xx, yy) {
   this.x = xx;
   this.y = yy;
 
-  this.speed = 5;
+  this.speed = 20;
   this.maxRows = 6;
   this.currentRow = 1;
   this.wallPixels = height / this.maxRows;
@@ -65,4 +65,13 @@ function Alien(xx, yy) {
       return true;
     }
   }
+
+  this.hasCollidedWithHero = function(a, w) {
+    if (a.y < 0 - w) return false;
+    if (a.y <= this.y + this.pic.height && a.x >= this.x && a.x <= this.x + this.pic.width) {
+      return true;
+    }
+  }
+
+
 }

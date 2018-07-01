@@ -3,6 +3,7 @@ let rocketPic;
 let SPACE = 32; // charcode for the space
 let points = 0;
 let alienKills = 0;
+let gameOn = true;
 
 let shootingSound;
 // let shootingSound = loadSound('shootingSound.mp3');
