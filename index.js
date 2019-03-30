@@ -33,7 +33,7 @@ function generateOneAlien() {
 
 function generateOneRandomSpeedAlien() {
   let alien = new Alien(0, 0);
-  alien.speed = Math.floor(Math.random() * 60) + 1; // returns a random integer from 5 to 45
+  alien.speed = Math.floor(Math.random() * 70) + 10; // returns a random integer from 5 to 45
   hero.aliens.push(alien);
 }
 
@@ -46,7 +46,8 @@ function preload() {
 
 
 function setup() {
-  createCanvas(1300, 725);
+  // createCanvas(screen.width, screen.height);
+  createCanvas(1500, 800);
   w = width;
   h = height;
   hero = new Hero('rocket.png');
@@ -60,6 +61,7 @@ function draw() {
   background(0);
 
   hero.show();
+
 
   showPoints();
   showKills();

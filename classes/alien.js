@@ -18,6 +18,10 @@ function Alien(xx, yy) {
   // for regular game
   this.pic = loadImage('pics/ufoeli.png');
 
+  // shoot trumps cabinet
+  //this.pic = loadImage(pictures[Math.floor(Math.random() * pictures.length)]);
+
+
 
   this.show = function() {
     image(this.pic, this.x, this.y);

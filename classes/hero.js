@@ -18,7 +18,7 @@ function Hero(img) {
   this.y = height - 128;
 
 
-  this.bulletSpeed = 20;
+  this.bulletSpeed = 30;
   this.moveBy = 10;
 
   this.show = function() {
