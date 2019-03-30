@@ -4,6 +4,9 @@ function Hero(img) {
   this.pic = loadImage(img);
   this.bullets = [];
   this.aliens = [new Alien(0, 0)];
+  this.waitingForAlienGeneration = false;
+
+  //this.shootSound = loadSound('shootingSound.mp3');
 
   // TODO: not really working
   // the width and height of the
@@ -16,9 +19,10 @@ function Hero(img) {
 
 
   this.bulletSpeed = 20;
-  this.moveBy = 8;
+  this.moveBy = 10;
 
   this.show = function() {
+    //console.log(this.numberOfAliens());
     if (gameOn) {
       // the person gets a point each frame
       points++;
@@ -70,7 +74,16 @@ function Hero(img) {
     }
 
 
-
+    // if he killed all of the aliens, then make his level bigger and add more so he loses, just kidding
+    if (this.numberOfAliens() == 0 && this.waitingForAlienGeneration == false) {
+      ///console.log("generating aliens");
+      // if you don't set this to true, it will call the setTimeout function every frame until 4 seconds later
+      this.waitingForAlienGeneration = true;
+      setTimeout(function() {
+        level++; // he is at a new level
+        generateAliens(level);
+      }, 4000); // give the guy a 4 second break between rounds
+    }
 
 
     // move the bullets for the next frame
@@ -85,6 +98,15 @@ function Hero(img) {
       this.x = width - this.pic.width;
     }
   };
+
+  // because I use `delete aliens[index]`, I cannot use aliens.length to get its length. The deleted spots show up in the .length
+  this.numberOfAliens = function() {
+    let counter = 0;
+    for (a in this.aliens) {
+      counter++;
+    }
+    return counter;
+  }
 
   this.moveLeft = function() {
     this.x -= this.moveBy;
@@ -106,6 +128,9 @@ function Hero(img) {
 
   // add bullets the array
   this.shoot = function() {
+
+    //this.shootSound.play();
+
     // add a new bullet at the position of the hero
     this.bullets.push(new Bullet(this.x + this.pic.width / 2, this.y));
     // shootingSound.play();

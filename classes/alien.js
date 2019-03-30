@@ -4,7 +4,7 @@ function Alien(xx, yy) {
   this.x = xx;
   this.y = yy;
 
-  this.speed = 20;
+  this.speed = 30;
   this.maxRows = 6;
   this.currentRow = 1;
   this.wallPixels = height / this.maxRows;
@@ -16,7 +16,7 @@ function Alien(xx, yy) {
   // this.pic = loadImage(pictures[Math.floor(Math.random() * pictures.length - 1)]);
 
   // for regular game
-  this.pic = loadImage('http://ddenenberg.com/ufo.png');
+  this.pic = loadImage('pics/ufoeli.png');
 
 
   this.show = function() {

@@ -5,6 +5,38 @@ let points = 0;
 let alienKills = 0;
 let gameOn = true;
 
+// keeps track of his level
+let level = 1;
+let alienGenerationSpeed = 90; // number of miliseconds between alien generation
+
+// recursivly adds numberToGenerate aliens to the game
+function generateAliens(numberOfAliensToGenerate) {
+  if (numberOfAliensToGenerate == 0) {
+    // make sure to set the waitingForAlienGeneration variable so that next time all of the aliens are killed, the hero.show() function will generate more
+    hero.waitingForAlienGeneration = false;
+    return;
+  }
+
+  setTimeout(
+    function() {
+      generateOneRandomSpeedAlien();
+      generateAliens(numberOfAliensToGenerate - 1);
+    },
+    alienGenerationSpeed
+  );
+}
+
+// adds one alien to the array
+function generateOneAlien() {
+  hero.aliens.push(new Alien(0, 0));
+}
+
+function generateOneRandomSpeedAlien() {
+  let alien = new Alien(0, 0);
+  alien.speed = Math.floor(Math.random() * 60) + 1; // returns a random integer from 5 to 45
+  hero.aliens.push(alien);
+}
+
 let shootingSound;
 // let shootingSound = loadSound('shootingSound.mp3');
 
@@ -17,7 +49,7 @@ function setup() {
   createCanvas(1300, 725);
   w = width;
   h = height;
-  hero = new Hero('http://ddenenberg.com/rocket.png');
+  hero = new Hero('rocket.png');
   // hero = new Hero('http://blog.thehigheredcio.com/wp-content/uploads/2012/01/President-Obama-college-tuition.jpg');
 }
 
@@ -31,6 +63,7 @@ function draw() {
 
   showPoints();
   showKills();
+  showLevel();
 
   // make it so we can check for someone holding down a key
   if (keyIsPressed) {
@@ -66,6 +99,12 @@ function showKills() {
   textSize(32);
   fill(255, 255, 255);
   text(`Alien Kills: ${alienKills.toString()}`, width / 2 - 60, height / 2 + 40);
+}
+
+function showLevel() {
+  textSize(32);
+  fill(255, 255, 255);
+  text(`Level: ${level}`, width / 2 - 30, height / 2 + 80);
 }
 
 // Just for fun, we will add an alien every time a user clicks the mouse
